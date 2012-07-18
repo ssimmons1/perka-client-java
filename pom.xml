@@ -16,8 +16,8 @@
   </licenses>
   <scm>
     <url>https://github.com/perka/cli</url>
-    <connection>scm:git:git@github.com:perka/perka-client-library.git</connection>
-    <developerConnection>scm:git:git@github.com:perka/perka-client-library.git</developerConnection>
+    <connection>scm:git:git@github.com:perka/perka-client-java.git</connection>
+    <developerConnection>scm:git:git@github.com:perka/perka-client-java.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
   <developers>
@@ -38,7 +38,7 @@
   </parent>
 
   <properties>
-    <flatpack.version>2.9-SNAPSHOT</flatpack.version>
+    <flatpack.version>2.9</flatpack.version>
   </properties>
 
   <dependencies>
