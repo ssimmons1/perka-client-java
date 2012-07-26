@@ -14,7 +14,7 @@
     </license>
   </licenses>
   <scm>
-    <url>https://github.com/perka/cli</url>
+    <url>https://github.com/perka/perka-client-java</url>
     <connection>scm:git:git@github.com:perka/perka-client-java.git</connection>
     <developerConnection>scm:git:git@github.com:perka/perka-client-java.git</developerConnection>
     <tag>HEAD</tag>
@@ -33,11 +33,11 @@
   <parent>
     <groupId>com.getperka</groupId>
     <artifactId>perka-oss-parent</artifactId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
   </parent>
 
   <properties>
-    <flatpack.version>2.9</flatpack.version>
+    <flatpack.version>2.11-SNAPSHOT</flatpack.version>
   </properties>
 
   <dependencies>
@@ -56,21 +56,6 @@
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>1.7.1</version>
-        <executions>
-          <execution>
-            <configuration>
-              <shadedArtifactAttached>true</shadedArtifactAttached>
-            </configuration>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <groupId>com.getperka.flatpack</groupId>
         <artifactId>flatpack-fast-maven-plugin</artifactId>
