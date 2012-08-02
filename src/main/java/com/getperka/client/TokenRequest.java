@@ -39,6 +39,7 @@ class TokenRequest extends JsonRequestBase<TokenRequest> {
 
   @Override
   protected void writeEntity(HttpURLConnection connection) throws IOException {
+    connection.setDoOutput(true);
     Writer writer = new OutputStreamWriter(connection.getOutputStream(), FlatPackTypes.UTF8);
     writer.write(payload);
     writer.close();
