@@ -32,14 +32,13 @@ class TokenRequest extends JsonRequestBase<TokenRequest> {
   private final String payload;
 
   TokenRequest(Perka api, String payload) {
-    super(api.api(), "POST", "/api/2/auth/token");
+    super(api.api(), "POST", "/api/2/auth/token", true);
     this.payload = payload;
     header("Content-Type", "application/x-www-form-urlencoded");
   }
 
   @Override
   protected void writeEntity(HttpURLConnection connection) throws IOException {
-    connection.setDoOutput(true);
     Writer writer = new OutputStreamWriter(connection.getOutputStream(), FlatPackTypes.UTF8);
     writer.write(payload);
     writer.close();
