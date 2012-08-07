@@ -47,7 +47,8 @@ public class Perka {
       protected HttpURLConnection filter(HttpURLConnection conn) {
         conn = super.filter(conn);
 
-        if (auth.getAccessToken() != null && auth.getAccessExpiration().isAfterNow()) {
+        if (auth.getAccessToken() != null
+          && (auth.getAccessExpiration() == null || auth.getAccessExpiration().isAfterNow())) {
           conn.setRequestProperty("Authorization", "Bearer " + auth.getAccessToken());
         }
 
