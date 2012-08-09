@@ -34,11 +34,11 @@
   <parent>
     <groupId>com.getperka</groupId>
     <artifactId>perka-oss-parent</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.3</version>
   </parent>
 
   <properties>
-    <flatpack.version>2.11-SNAPSHOT</flatpack.version>
+    <flatpack.version>2.11</flatpack.version>
   </properties>
 
   <dependencies>
