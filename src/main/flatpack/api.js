@@ -261,15 +261,16 @@
           "311e4d48-1ba6-33d1-96b5-9f52824c3638",
           "4fc11912-8fdf-3551-be83-e17ecf55704a",
           "99a63fa0-c4f1-3326-ae14-f6a227e81d4e",
+          "fd70aa05-4f4d-3fa6-abbe-284bcd755b44",
+          "705dac16-44d0-3f79-b133-80f4e907ae95",
           "8aa51492-5b0b-3291-964e-bc20187996e3",
           "ee223534-1529-386e-af29-67a79a507a4f",
           "5e16feef-b9d3-3eaa-91e9-f8288233d981",
           "21524947-6d66-3372-be1f-5bf4155c2acd",
-          "9854debf-8e6b-313d-9de8-edc0ffe8b944",
           "cb3bc90e-389e-376b-a3a9-c9c1f71a5214",
           "9603a33c-6363-38e1-89dc-5cb1f9eb5c06",
           "aeec11d2-c29c-308b-aa83-aaaa3997fee4",
-          "fd70aa05-4f4d-3fa6-abbe-284bcd755b44"
+          "831bac80-43b1-3e85-8ed4-0576dcef3019"
         ],
         "typeName": "merchant",
         "persistent": true,
@@ -469,11 +470,11 @@
           "7032541c-9b4b-3576-9ac4-6329b13470c9",
           "62976edf-002a-33ae-9df9-b8a2a344d358",
           "96b33fa5-c097-3137-a384-2d6b8965a14f",
-          "902fb07e-f026-3514-97f3-cccd274dd0ac",
           "fc4b0f57-c901-3fb1-a298-e8547b5a943a",
           "167d932c-265a-39f7-bb79-b34cf7908b13",
           "316f2ddb-069e-34e3-becb-49b83aeabac7",
-          "3ea8683f-cbd5-3e58-b91a-ad714524b056"
+          "3ea8683f-cbd5-3e58-b91a-ad714524b056",
+          "902fb07e-f026-3514-97f3-cccd274dd0ac"
         ],
         "typeName": "pointsCatalogItem",
         "persistent": true,
@@ -736,8 +737,8 @@
           "94b183a6-1b8a-32e4-a076-327043c157dc",
           "7d2b6715-fbbd-33fe-91ed-9a97a63dec94",
           "178bd9a6-1e55-3f2b-868c-54deafbd715e",
-          "3a696515-afed-3c07-b2be-9658d90d06b4",
-          "7103b368-bb90-3e01-8133-ce03bffcae58"
+          "7103b368-bb90-3e01-8133-ce03bffcae58",
+          "3a696515-afed-3c07-b2be-9658d90d06b4"
         ],
         "typeName": "program",
         "persistent": true,
@@ -1083,13 +1084,13 @@
           "4e9a5635-d4d3-37ed-9a6f-542c9bb652fa",
           "65f23edb-7df6-3346-a4a8-05476b83b9f3",
           "ac52d49f-9f68-3d72-8bf8-fa52e62eb481",
-          "b5e486c1-432f-34d1-90f0-33d15f4b7569",
-          "735d044c-8b49-3144-a793-470c7959c644",
           "f8e9a98f-6196-3c6c-8fdc-962f492d91c6",
-          "946ab97b-783d-3010-97a9-b625cbe7a45c",
           "8b83906b-7138-3951-8c11-5e4a8401e620",
+          "735d044c-8b49-3144-a793-470c7959c644",
+          "946ab97b-783d-3010-97a9-b625cbe7a45c",
           "a1e1390d-6d31-345f-95f1-ce689a866e6b",
           "0c29c488-eee8-37e4-9f88-117061985f19",
+          "b5e486c1-432f-34d1-90f0-33d15f4b7569",
           "e0d256a6-42ef-3264-b194-d658aa2f22e7",
           "8e23c911-3f9e-3a94-9bec-820c21a67b68"
         ],
@@ -1120,9 +1121,9 @@
           "bddc8979-3a44-371c-b158-155b38dcced4",
           "7032541c-9b4b-3576-9ac4-6329b13470c9",
           "62976edf-002a-33ae-9df9-b8a2a344d358",
+          "2581817e-cef9-3633-8dfc-d2e2401618ca",
           "a7655794-8dcf-3170-9a6b-67cc43cc762b",
-          "6a1a36cb-0fc0-35cb-8cda-01309dced89d",
-          "2581817e-cef9-3633-8dfc-d2e2401618ca"
+          "6a1a36cb-0fc0-35cb-8cda-01309dced89d"
         ],
         "typeName": "couponCampaign",
         "persistent": true,
@@ -2311,6 +2312,42 @@
         "suppressDefaultValue": false
       },
       {
+        "uuid": "fd70aa05-4f4d-3fa6-abbe-284bcd755b44",
+        "name": "terms",
+        "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
+        "enclosingTypeName": "merchant",
+        "getterRoleNames": [
+          "CLERK",
+          "CUSTOMER"
+        ],
+        "setterRoleNames": [
+          "MERCHANT"
+        ],
+        "deepTraversalOnly": false,
+        "embedded": false,
+        "inheritPrincipal": false,
+        "suppressDefaultValue": false
+      },
+      {
+        "uuid": "705dac16-44d0-3f79-b133-80f4e907ae95",
+        "name": "loyaltyType",
+        "typeUuid": "4cd0de24-55fb-3b82-9034-beff5eabf1f5",
+        "enclosingTypeName": "merchant",
+        "getterRoleNames": [
+          "CLERK",
+          "CUSTOMER",
+          "MERCHANT"
+        ],
+        "setterRoleNames": [
+          "INTERNAL",
+          "INTEGRATOR"
+        ],
+        "deepTraversalOnly": false,
+        "embedded": false,
+        "inheritPrincipal": false,
+        "suppressDefaultValue": false
+      },
+      {
         "uuid": "8aa51492-5b0b-3291-964e-bc20187996e3",
         "name": "salesDemo",
         "typeUuid": "22176e08-d364-37ea-9478-488aa68dd24a",
@@ -2411,25 +2448,6 @@
         "suppressDefaultValue": false
       },
       {
-        "uuid": "9854debf-8e6b-313d-9de8-edc0ffe8b944",
-        "name": "merchantProgramType",
-        "typeUuid": "eac1ba8c-a56b-366b-9793-2e822d0900b8",
-        "enclosingTypeName": "merchant",
-        "getterRoleNames": [
-          "CLERK",
-          "CUSTOMER",
-          "MERCHANT"
-        ],
-        "setterRoleNames": [
-          "INTERNAL",
-          "INTEGRATOR"
-        ],
-        "deepTraversalOnly": false,
-        "embedded": false,
-        "inheritPrincipal": false,
-        "suppressDefaultValue": false
-      },
-      {
         "uuid": "cb3bc90e-389e-376b-a3a9-c9c1f71a5214",
         "name": "merchantUsers",
         "typeUuid": "8c412796-7113-3d77-90f5-60616949233a",
@@ -2518,13 +2536,13 @@
         "suppressDefaultValue": false
       },
       {
-        "uuid": "fd70aa05-4f4d-3fa6-abbe-284bcd755b44",
-        "name": "terms",
-        "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
+        "uuid": "831bac80-43b1-3e85-8ed4-0576dcef3019",
+        "name": "pointsSignupBonus",
+        "typeUuid": "1c194a04-8703-36ea-986b-1653066e407f",
+        "docString": "Points-based merchants may offer a signup bonus to new customers for signing up.",
         "enclosingTypeName": "merchant",
         "getterRoleNames": [
-          "CLERK",
-          "CUSTOMER"
+          "MERCHANT"
         ],
         "setterRoleNames": [
           "MERCHANT"
@@ -3098,6 +3116,7 @@
         "uuid": "004c961b-6c40-3603-ad27-7568d4f6622d",
         "name": "currentPointsActivity",
         "typeUuid": "244e6775-bb38-31b8-889c-2574de66832b",
+        "docString": "The latest <entityReference payloadName='pointsActivity'> PointsActivity</entityReference> for the Visit's <entityReference payloadName='customer'> Customer</entityReference> at the\n <entityReference payloadName='merchantLocation'> MerchantLocation</entityReference>. This may be null if the customer has no previous points activity at\n the merchant.",
         "enclosingTypeName": "visit",
         "getterRoleNames": [
           "CLERK",
@@ -3242,23 +3261,6 @@
         "suppressDefaultValue": false
       },
       {
-        "uuid": "902fb07e-f026-3514-97f3-cccd274dd0ac",
-        "name": "terms",
-        "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
-        "docString": "A longer text description of the item, including any terms and conditions.",
-        "enclosingTypeName": "pointsCatalogItem",
-        "getterRoleNames": [
-          "*"
-        ],
-        "setterRoleNames": [
-          "MERCHANT"
-        ],
-        "deepTraversalOnly": false,
-        "embedded": false,
-        "inheritPrincipal": false,
-        "suppressDefaultValue": false
-      },
-      {
         "uuid": "fc4b0f57-c901-3fb1-a298-e8547b5a943a",
         "name": "expiresAt",
         "typeUuid": "05ece1e1-252a-3386-aa02-a83b406751d7",
@@ -3314,6 +3316,23 @@
         "name": "pointsRequired",
         "typeUuid": "1c194a04-8703-36ea-986b-1653066e407f",
         "docString": "The number of points required to redeem the item.",
+        "enclosingTypeName": "pointsCatalogItem",
+        "getterRoleNames": [
+          "*"
+        ],
+        "setterRoleNames": [
+          "MERCHANT"
+        ],
+        "deepTraversalOnly": false,
+        "embedded": false,
+        "inheritPrincipal": false,
+        "suppressDefaultValue": false
+      },
+      {
+        "uuid": "902fb07e-f026-3514-97f3-cccd274dd0ac",
+        "name": "terms",
+        "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
+        "docString": "A longer text description of the item, including any terms and conditions.",
         "enclosingTypeName": "pointsCatalogItem",
         "getterRoleNames": [
           "*"
@@ -4191,22 +4210,6 @@
         "suppressDefaultValue": false
       },
       {
-        "uuid": "3a696515-afed-3c07-b2be-9658d90d06b4",
-        "name": "purchasedItem",
-        "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
-        "enclosingTypeName": "program",
-        "getterRoleNames": [
-          "*"
-        ],
-        "setterRoleNames": [
-          "MERCHANT"
-        ],
-        "deepTraversalOnly": false,
-        "embedded": false,
-        "inheritPrincipal": false,
-        "suppressDefaultValue": false
-      },
-      {
         "uuid": "7103b368-bb90-3e01-8133-ce03bffcae58",
         "name": "punchesNeededSuffix",
         "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
@@ -4216,6 +4219,22 @@
         ],
         "setterRoleNames": [
           "*"
+        ],
+        "deepTraversalOnly": false,
+        "embedded": false,
+        "inheritPrincipal": false,
+        "suppressDefaultValue": false
+      },
+      {
+        "uuid": "3a696515-afed-3c07-b2be-9658d90d06b4",
+        "name": "purchasedItem",
+        "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
+        "enclosingTypeName": "program",
+        "getterRoleNames": [
+          "*"
+        ],
+        "setterRoleNames": [
+          "MERCHANT"
         ],
         "deepTraversalOnly": false,
         "embedded": false,
@@ -5026,39 +5045,6 @@
         "suppressDefaultValue": false
       },
       {
-        "uuid": "b5e486c1-432f-34d1-90f0-33d15f4b7569",
-        "name": "title",
-        "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
-        "enclosingTypeName": "coupon",
-        "getterRoleNames": [
-          "*"
-        ],
-        "setterRoleNames": [
-          "MERCHANT"
-        ],
-        "deepTraversalOnly": false,
-        "embedded": false,
-        "inheritPrincipal": false,
-        "suppressDefaultValue": false
-      },
-      {
-        "uuid": "735d044c-8b49-3144-a793-470c7959c644",
-        "name": "localBeginsAt",
-        "typeUuid": "58c347e8-8af5-3fde-8c79-d148897068e9",
-        "docString": "This property doesn't represent a single instance in time (i.e. a number of milliseconds past\n the epoch in UTC time). Instead, this value must be interpreted using the user's local\n timezone. For example, if the exact instant stored in this value is noon UTC time on\n such-and-such a day, this value should be interpreted to mean noon on that same date in the\n user's local timezone.",
-        "enclosingTypeName": "coupon",
-        "getterRoleNames": [
-          "*"
-        ],
-        "setterRoleNames": [
-          "MERCHANT"
-        ],
-        "deepTraversalOnly": false,
-        "embedded": false,
-        "inheritPrincipal": false,
-        "suppressDefaultValue": false
-      },
-      {
         "uuid": "f8e9a98f-6196-3c6c-8fdc-962f492d91c6",
         "name": "couponCampaign",
         "typeUuid": "1140a26f-0bd5-3416-ba80-48f72e56026c",
@@ -5096,10 +5082,10 @@
         "suppressDefaultValue": false
       },
       {
-        "uuid": "946ab97b-783d-3010-97a9-b625cbe7a45c",
-        "name": "localEndsAt",
-        "typeUuid": "58c347e8-8af5-3fde-8c79-d148897068e9",
-        "docString": "See note on  #getLocalBeginsAt() on how to interpret this.",
+        "uuid": "8b83906b-7138-3951-8c11-5e4a8401e620",
+        "name": "imageName",
+        "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
+        "docString": "The short perk icon name (e.g. <code>unicorn</code>).",
         "enclosingTypeName": "coupon",
         "getterRoleNames": [
           "*"
@@ -5113,10 +5099,27 @@
         "suppressDefaultValue": false
       },
       {
-        "uuid": "8b83906b-7138-3951-8c11-5e4a8401e620",
-        "name": "imageName",
-        "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
-        "docString": "The short perk icon name (e.g. <code>unicorn</code>).",
+        "uuid": "735d044c-8b49-3144-a793-470c7959c644",
+        "name": "localBeginsAt",
+        "typeUuid": "58c347e8-8af5-3fde-8c79-d148897068e9",
+        "docString": "This property doesn't represent a single instance in time (i.e. a number of milliseconds past\n the epoch in UTC time). Instead, this value must be interpreted using the user's local\n timezone. For example, if the exact instant stored in this value is noon UTC time on\n such-and-such a day, this value should be interpreted to mean noon on that same date in the\n user's local timezone.",
+        "enclosingTypeName": "coupon",
+        "getterRoleNames": [
+          "*"
+        ],
+        "setterRoleNames": [
+          "MERCHANT"
+        ],
+        "deepTraversalOnly": false,
+        "embedded": false,
+        "inheritPrincipal": false,
+        "suppressDefaultValue": false
+      },
+      {
+        "uuid": "946ab97b-783d-3010-97a9-b625cbe7a45c",
+        "name": "localEndsAt",
+        "typeUuid": "58c347e8-8af5-3fde-8c79-d148897068e9",
+        "docString": "See note on  #getLocalBeginsAt() on how to interpret this.",
         "enclosingTypeName": "coupon",
         "getterRoleNames": [
           "*"
@@ -5152,6 +5155,22 @@
         "enclosingTypeName": "coupon",
         "getterRoleNames": [
           "INTERNAL"
+        ],
+        "setterRoleNames": [
+          "MERCHANT"
+        ],
+        "deepTraversalOnly": false,
+        "embedded": false,
+        "inheritPrincipal": false,
+        "suppressDefaultValue": false
+      },
+      {
+        "uuid": "b5e486c1-432f-34d1-90f0-33d15f4b7569",
+        "name": "title",
+        "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
+        "enclosingTypeName": "coupon",
+        "getterRoleNames": [
+          "*"
         ],
         "setterRoleNames": [
           "MERCHANT"
@@ -5260,10 +5279,9 @@
         "suppressDefaultValue": false
       },
       {
-        "uuid": "6a1a36cb-0fc0-35cb-8cda-01309dced89d",
-        "name": "rrule",
+        "uuid": "2581817e-cef9-3633-8dfc-d2e2401618ca",
+        "name": "title",
         "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
-        "docString": "Retains the original <code>RRULE</code> string used to construct the campaign.",
         "enclosingTypeName": "couponCampaign",
         "getterRoleNames": [
           "MERCHANT"
@@ -5277,9 +5295,10 @@
         "suppressDefaultValue": false
       },
       {
-        "uuid": "2581817e-cef9-3633-8dfc-d2e2401618ca",
-        "name": "title",
+        "uuid": "6a1a36cb-0fc0-35cb-8cda-01309dced89d",
+        "name": "rrule",
         "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
+        "docString": "Retains the original <code>RRULE</code> string used to construct the campaign.",
         "enclosingTypeName": "couponCampaign",
         "getterRoleNames": [
           "MERCHANT"
@@ -5474,6 +5493,15 @@
         ]
       },
       {
+        "uuid": "4cd0de24-55fb-3b82-9034-beff5eabf1f5",
+        "name": "loyaltyType",
+        "jsonKind": "STRING",
+        "enumValues": [
+          "POINT",
+          "PUNCHCARD"
+        ]
+      },
+      {
         "uuid": "d42c3ee9-8fed-31de-a0ca-12c6b9066d6e",
         "jsonKind": "LIST",
         "listElementUuid": "3ddc38bd-4bd9-30cc-b29f-64c41a9bc1fe"
@@ -5487,15 +5515,6 @@
         "uuid": "0a2e2ccf-d9d1-34f0-9863-2a3fda95ed7d",
         "jsonKind": "LIST",
         "listElementUuid": "c84bc13f-deda-330f-814f-d6cb4eb1d8c0"
-      },
-      {
-        "uuid": "eac1ba8c-a56b-366b-9793-2e822d0900b8",
-        "name": "merchantProgramType",
-        "jsonKind": "STRING",
-        "enumValues": [
-          "POINT",
-          "PUNCHCARD"
-        ]
       },
       {
         "uuid": "8c412796-7113-3d77-90f5-60616949233a",
@@ -5727,11 +5746,6 @@
         ]
       },
       {
-        "uuid": "58c347e8-8af5-3fde-8c79-d148897068e9",
-        "jsonKind": "STRING",
-        "typeHint": "org.joda.time.LocalDateTime"
-      },
-      {
         "uuid": "1140a26f-0bd5-3416-ba80-48f72e56026c",
         "name": "couponCampaign",
         "jsonKind": "STRING"
@@ -5740,6 +5754,11 @@
         "uuid": "6faa8b3f-27e1-3b90-80c1-3202588ac435",
         "jsonKind": "LIST",
         "listElementUuid": "57504ce9-2871-3529-8017-069ecdf41d64"
+      },
+      {
+        "uuid": "58c347e8-8af5-3fde-8c79-d148897068e9",
+        "jsonKind": "STRING",
+        "typeHint": "org.joda.time.LocalDateTime"
       },
       {
         "uuid": "b4fcc6c0-5b20-359f-afb5-0635ce5e52e1",
@@ -5814,6 +5833,7 @@
         "method": "GET",
         "returnTypeUuid": "b4fcc6c0-5b20-359f-afb5-0635ce5e52e1",
         "path": "/api/2/customer/points",
+        "docString": "Returns the current customer's PointsActivity status across all merchants with a points-based\n loyalty system.",
         "roleNames": [
           "CUSTOMER"
         ]

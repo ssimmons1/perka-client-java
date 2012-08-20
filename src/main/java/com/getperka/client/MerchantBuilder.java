@@ -152,7 +152,7 @@ public class MerchantBuilder {
     }
   }
 
-  private MerchantProgramType establishedProgramType;
+  private LoyaltyType establishedLoyaltyType;
   private Merchant merchant;
   private ProgramTier localTier;
   private ProgramTier regularTier;
@@ -245,7 +245,7 @@ public class MerchantBuilder {
    * Creates a helper object for configuring a points-based loyalty program.
    */
   public PointsBuilder withPointsProgram() {
-    checkProgramType(MerchantProgramType.POINT);
+    checkProgramType(LoyaltyType.POINT);
     return new PointsBuilder();
   }
 
@@ -261,7 +261,7 @@ public class MerchantBuilder {
    * @return a builder for customizing the offering
    */
   public OfferBuilder withProgram(String programName) {
-    checkProgramType(MerchantProgramType.PUNCHCARD);
+    checkProgramType(LoyaltyType.PUNCHCARD);
     return new OfferBuilder(programName);
   }
 
@@ -282,15 +282,15 @@ public class MerchantBuilder {
     return this;
   }
 
-  private void checkProgramType(MerchantProgramType desiredType) {
-    if (desiredType.equals(establishedProgramType)) {
+  private void checkProgramType(LoyaltyType desiredType) {
+    if (desiredType.equals(establishedLoyaltyType)) {
       return;
     }
-    if (establishedProgramType != null) {
-      throw new IllegalStateException("Cannot switch from " + establishedProgramType + " to "
+    if (establishedLoyaltyType != null) {
+      throw new IllegalStateException("Cannot switch from " + establishedLoyaltyType + " to "
         + desiredType);
     }
-    establishedProgramType = desiredType;
-    merchant.setMerchantProgramType(desiredType);
+    establishedLoyaltyType = desiredType;
+    merchant.setLoyaltyType(desiredType);
   }
 }
