@@ -8,6 +8,7 @@
           "49203881-f3a1-3af0-91ef-1950dc060bc5",
           "87b8d9da-4903-3d8c-a293-fa19679f06ad",
           "9ea38475-39ce-303a-a053-5a386d017267",
+          "5f469b1d-e952-3980-b899-3afc6ae89b59",
           "95dcf7be-f712-348f-81fa-694a2b322b8f",
           "e31625a8-ebbc-3f36-8a41-e984cd426889",
           "293b86b6-f256-39cb-93b4-be912bb3b922",
@@ -81,6 +82,8 @@
           "60b5cd22-7a8a-313e-8dc8-11e6a870f7f6",
           "f7cf5984-d515-30fc-8b11-057c4fcdfad0",
           "9a6c26e2-c269-380c-b449-8f5c56a67140",
+          "de28436a-7255-3e2d-8939-a0ad2fda4fee",
+          "b24d7dfc-8f4f-3344-9a72-2754ffb3526e",
           "c02af91b-3a2e-3899-9464-904c9f113e8e",
           "261954d5-e79a-3d1a-a78d-e03eae1e2123",
           "293dea93-b6d0-32ea-94f0-f5ff0584cd97",
@@ -151,6 +154,20 @@
         "persistent": false,
         "docString": "A description of the entities contained within an API.",
         "supertypeUuid": "047a267b-694a-3e82-a9af-b14ae7431ea3"
+      },
+      {
+        "uuid": "5f469b1d-e952-3980-b899-3afc6ae89b59",
+        "propertiesUuid": [
+          "bddc8979-3a44-371c-b158-155b38dcced4",
+          "7032541c-9b4b-3576-9ac4-6329b13470c9",
+          "62976edf-002a-33ae-9df9-b8a2a344d358",
+          "03a54040-f781-37bf-a407-12bb81f41d6a",
+          "63729edf-581c-384f-867e-839e047e958e"
+        ],
+        "typeName": "entityAnnotation",
+        "persistent": true,
+        "docString": "Allows integrators to associate an arbitrary JSON object with a persistent entity. Any instance\n of an EntityAnnotation is specific to a particular IntegratorUser and multiple integrators may\n annotate the same entity.\n <p>\n When a request is made to the API server by an integrator or by any other user that is managed by\n an integrator, any EntityAnnotations associated with objects in the returned payload will be\n included as extra data.",
+        "supertypeUuid": "49203881-f3a1-3af0-91ef-1950dc060bc5"
       },
       {
         "uuid": "95dcf7be-f712-348f-81fa-694a2b322b8f",
@@ -335,6 +352,8 @@
           "34b7be9e-4ff6-3dfc-8032-8eca437427d7",
           "2dc91260-0d56-3282-ab6d-39f9c0e9f69d",
           "b76e0c0a-bf40-3554-adcf-048a620515b6",
+          "d71e0a38-8383-3261-b31c-cbb10032663c",
+          "84724c1a-44c3-3a0f-a9b9-b9bb34861cd1",
           "e54f6d53-ba05-3999-b4f9-98ec15fa172c",
           "3c0366e4-ec23-3ac6-857d-49e3cf09f4ce",
           "e962d5c4-ae83-36ba-877c-d4033ee633ce",
@@ -477,8 +496,8 @@
           "a18b1330-c2f4-3923-87ba-f511d5b6a018",
           "0da7cfc0-6137-36de-b36a-870de2cbd263",
           "dd799707-e571-3759-b935-8e20ffa5030d",
-          "5be6cbb3-3b88-383f-b557-26688d4e1a41",
           "54431d6e-df0d-3c5e-8ab4-723d8607095e",
+          "5be6cbb3-3b88-383f-b557-26688d4e1a41",
           "96a0fa0a-3eda-32f2-825f-5db97e122c16",
           "424c9e0c-260a-3438-9ada-ee35161ce8d6"
         ],
@@ -551,9 +570,9 @@
           "3a3cca9d-e940-3f8b-98dd-df93b4b4ca6e",
           "836b3e6e-aa54-375a-9712-0c2f3d56220f",
           "6b1950d1-2b5e-35c6-bdc5-36bc15457f64",
+          "9a535527-d615-3862-babf-2e5006f5de43",
           "9dc21477-8ffe-34c2-9f08-5e09c8fe4b6d",
-          "67959e44-3b75-39a0-8a82-223795d66047",
-          "9a535527-d615-3862-babf-2e5006f5de43"
+          "67959e44-3b75-39a0-8a82-223795d66047"
         ],
         "typeName": "programTier",
         "persistent": true,
@@ -669,6 +688,7 @@
           "e0e0884f-75dc-382a-bc5b-63ed72b0d3cb",
           "dc312cae-cc41-3bf9-9169-9f3f5b269a56",
           "29e06709-537a-38b6-a230-bc5ddaa8f482",
+          "e393351a-bfb4-3496-939c-401f28e9982e",
           "49b94528-e496-30ad-9c34-d6958da365df",
           "ef486fc5-cb3d-310d-a7cf-0c6ce659d14d",
           "9c512d1b-d974-348d-a157-d3cbc6d64eb9"
@@ -1027,13 +1047,13 @@
           "4e9a5635-d4d3-37ed-9a6f-542c9bb652fa",
           "65f23edb-7df6-3346-a4a8-05476b83b9f3",
           "ac52d49f-9f68-3d72-8bf8-fa52e62eb481",
-          "b5e486c1-432f-34d1-90f0-33d15f4b7569",
           "735d044c-8b49-3144-a793-470c7959c644",
           "f8e9a98f-6196-3c6c-8fdc-962f492d91c6",
           "946ab97b-783d-3010-97a9-b625cbe7a45c",
           "8b83906b-7138-3951-8c11-5e4a8401e620",
           "a1e1390d-6d31-345f-95f1-ce689a866e6b",
           "0c29c488-eee8-37e4-9f88-117061985f19",
+          "b5e486c1-432f-34d1-90f0-33d15f4b7569",
           "e0d256a6-42ef-3264-b194-d658aa2f22e7",
           "8e23c911-3f9e-3a94-9bec-820c21a67b68"
         ],
@@ -1064,9 +1084,9 @@
           "bddc8979-3a44-371c-b158-155b38dcced4",
           "7032541c-9b4b-3576-9ac4-6329b13470c9",
           "62976edf-002a-33ae-9df9-b8a2a344d358",
+          "2581817e-cef9-3633-8dfc-d2e2401618ca",
           "a7655794-8dcf-3170-9a6b-67cc43cc762b",
-          "6a1a36cb-0fc0-35cb-8cda-01309dced89d",
-          "2581817e-cef9-3633-8dfc-d2e2401618ca"
+          "6a1a36cb-0fc0-35cb-8cda-01309dced89d"
         ],
         "typeName": "couponCampaign",
         "persistent": true,
@@ -1401,6 +1421,40 @@
         "suppressDefaultValue": false
       },
       {
+        "uuid": "03a54040-f781-37bf-a407-12bb81f41d6a",
+        "name": "annotation",
+        "typeUuid": "ad304f3c-d781-3fe7-956a-cd2c37a284f9",
+        "docString": "The custom data which may be any JSON value.",
+        "enclosingTypeName": "entityAnnotation",
+        "getterRoleNames": [
+          "*"
+        ],
+        "setterRoleNames": [
+          "INTEGRATOR"
+        ],
+        "deepTraversalOnly": false,
+        "embedded": false,
+        "inheritPrincipal": false,
+        "suppressDefaultValue": false
+      },
+      {
+        "uuid": "63729edf-581c-384f-867e-839e047e958e",
+        "name": "entity",
+        "typeUuid": "bd3aece5-501d-3382-97ac-bf91ab923588",
+        "docString": "The target entity for the annotation.",
+        "enclosingTypeName": "entityAnnotation",
+        "getterRoleNames": [
+          "*"
+        ],
+        "setterRoleNames": [
+          "INTEGRATOR"
+        ],
+        "deepTraversalOnly": false,
+        "embedded": false,
+        "inheritPrincipal": false,
+        "suppressDefaultValue": false
+      },
+      {
         "uuid": "1e248412-dd89-325e-9e9d-b6fa516cd7e9",
         "name": "email",
         "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
@@ -1590,10 +1644,7 @@
           "INTEGRATOR",
           "CUSTOMER"
         ],
-        "setterRoleNames": [
-          "INTEGRATOR",
-          "CUSTOMER"
-        ],
+        "setterRoleNames": [],
         "deepTraversalOnly": false,
         "embedded": false,
         "inheritPrincipal": false,
@@ -1689,11 +1740,7 @@
           "CUSTOMER",
           "CLERK"
         ],
-        "setterRoleNames": [
-          "INTEGRATOR",
-          "CUSTOMER",
-          "CLERK"
-        ],
+        "setterRoleNames": [],
         "deepTraversalOnly": false,
         "embedded": false,
         "inheritPrincipal": false,
@@ -2343,6 +2390,38 @@
         "suppressDefaultValue": false
       },
       {
+        "uuid": "d71e0a38-8383-3261-b31c-cbb10032663c",
+        "name": "email",
+        "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
+        "enclosingTypeName": "merchantUser",
+        "getterRoleNames": [
+          "MERCHANT"
+        ],
+        "setterRoleNames": [
+          "MERCHANT"
+        ],
+        "deepTraversalOnly": false,
+        "embedded": false,
+        "inheritPrincipal": false,
+        "suppressDefaultValue": false
+      },
+      {
+        "uuid": "84724c1a-44c3-3a0f-a9b9-b9bb34861cd1",
+        "name": "unconfirmedEmail",
+        "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
+        "enclosingTypeName": "merchantUser",
+        "getterRoleNames": [
+          "MERCHANT"
+        ],
+        "setterRoleNames": [
+          "MERCHANT"
+        ],
+        "deepTraversalOnly": false,
+        "embedded": false,
+        "inheritPrincipal": false,
+        "suppressDefaultValue": false
+      },
+      {
         "uuid": "3c0366e4-ec23-3ac6-857d-49e3cf09f4ce",
         "name": "weeklyEmailEnabled",
         "typeUuid": "22176e08-d364-37ea-9478-488aa68dd24a",
@@ -2579,9 +2658,7 @@
         "getterRoleNames": [
           "CUSTOMER"
         ],
-        "setterRoleNames": [
-          "CUSTOMER"
-        ],
+        "setterRoleNames": [],
         "deepTraversalOnly": false,
         "embedded": false,
         "inheritPrincipal": false,
@@ -2768,10 +2845,7 @@
           "CLERK",
           "CUSTOMER"
         ],
-        "setterRoleNames": [
-          "CLERK",
-          "CUSTOMER"
-        ],
+        "setterRoleNames": [],
         "deepTraversalOnly": false,
         "embedded": false,
         "inheritPrincipal": false,
@@ -2859,10 +2933,7 @@
           "CUSTOMER"
         ],
         "impliedPropertyUuid": "fb0ec0f9-6a14-3200-a76a-fcd7f1a4b7a6",
-        "setterRoleNames": [
-          "CLERK",
-          "CUSTOMER"
-        ],
+        "setterRoleNames": [],
         "deepTraversalOnly": true,
         "embedded": false,
         "inheritPrincipal": false,
@@ -2907,14 +2978,30 @@
         "uuid": "6d5ab9e2-a3cc-3a96-93d1-b0a5ffcbd48e",
         "name": "couponRedemptions",
         "typeUuid": "31e1e458-1516-3ce3-8837-04064c7ec13c",
+        "docString": "The <entityReference payloadName='coupon'> Coupons</entityReference> that were redeemed during the visit.",
         "enclosingTypeName": "visit",
-        "getterRoleNames": [
-          ""
-        ],
+        "getterRoleNames": [],
+        "impliedPropertyUuid": "43270d2a-8642-38b9-a138-9fc23ff9691e",
         "setterRoleNames": [
           "CLERK",
           "CUSTOMER"
         ],
+        "deepTraversalOnly": true,
+        "embedded": false,
+        "inheritPrincipal": false,
+        "suppressDefaultValue": false
+      },
+      {
+        "uuid": "43270d2a-8642-38b9-a138-9fc23ff9691e",
+        "name": "visit",
+        "typeUuid": "5353cf4d-c234-3ccd-aa8c-3720c02ee3ea",
+        "enclosingTypeName": "couponRedemption",
+        "getterRoleNames": [
+          "CLERK",
+          "CUSTOMER"
+        ],
+        "impliedPropertyUuid": "6d5ab9e2-a3cc-3a96-93d1-b0a5ffcbd48e",
+        "setterRoleNames": [],
         "deepTraversalOnly": false,
         "embedded": false,
         "inheritPrincipal": false,
@@ -2924,10 +3011,9 @@
         "uuid": "1ab83244-8f99-3688-80c8-2ea584ead5ab",
         "name": "feedbackItem",
         "typeUuid": "29b3fcbe-a69c-3c0c-b6ea-1f3f2cf15d04",
+        "docString": "Any feedback left by the Customer after the Visit was validated.",
         "enclosingTypeName": "visit",
-        "getterRoleNames": [
-          ""
-        ],
+        "getterRoleNames": [],
         "setterRoleNames": [
           "CLERK",
           "CUSTOMER"
@@ -3275,10 +3361,10 @@
         "suppressDefaultValue": false
       },
       {
-        "uuid": "5be6cbb3-3b88-383f-b557-26688d4e1a41",
-        "name": "pathParameters",
-        "typeUuid": "45ae7e6a-bbb1-3bb0-a7bc-5f58d06a75d7",
-        "docString": "Describes any parameters embedded in  #getPath().",
+        "uuid": "54431d6e-df0d-3c5e-8ab4-723d8607095e",
+        "name": "entity",
+        "typeUuid": "ac519969-0cab-3a23-b68c-1db2cbd0bff7",
+        "docString": "The expected entity type for the request. Generally, the <code>HTTP POST</code> body.",
         "enclosingTypeName": "endpointDescription",
         "getterRoleNames": [
           "*"
@@ -3292,10 +3378,10 @@
         "suppressDefaultValue": false
       },
       {
-        "uuid": "54431d6e-df0d-3c5e-8ab4-723d8607095e",
-        "name": "entity",
-        "typeUuid": "ac519969-0cab-3a23-b68c-1db2cbd0bff7",
-        "docString": "The expected entity type for the request. Generally, the <code>HTTP POST</code> body.",
+        "uuid": "5be6cbb3-3b88-383f-b557-26688d4e1a41",
+        "name": "pathParameters",
+        "typeUuid": "45ae7e6a-bbb1-3bb0-a7bc-5f58d06a75d7",
+        "docString": "Describes any parameters embedded in  #getPath().",
         "enclosingTypeName": "endpointDescription",
         "getterRoleNames": [
           "*"
@@ -3382,8 +3468,24 @@
           "CUSTOMER",
           "CLERK"
         ],
+        "impliedPropertyUuid": "9a535527-d615-3862-babf-2e5006f5de43",
         "setterRoleNames": [],
         "deepTraversalOnly": false,
+        "embedded": false,
+        "inheritPrincipal": false,
+        "suppressDefaultValue": false
+      },
+      {
+        "uuid": "9a535527-d615-3862-babf-2e5006f5de43",
+        "name": "tierTraversals",
+        "typeUuid": "f9e64367-9db3-34c2-a269-1a7da01352ea",
+        "enclosingTypeName": "programTier",
+        "getterRoleNames": [],
+        "impliedPropertyUuid": "4a93ae53-1e28-3969-ad1d-23c18f7476b4",
+        "setterRoleNames": [
+          "MERCHANT"
+        ],
+        "deepTraversalOnly": true,
         "embedded": false,
         "inheritPrincipal": false,
         "suppressDefaultValue": false
@@ -3480,22 +3582,6 @@
         "getterRoleNames": [
           "CLERK",
           "CUSTOMER"
-        ],
-        "setterRoleNames": [
-          "MERCHANT"
-        ],
-        "deepTraversalOnly": false,
-        "embedded": false,
-        "inheritPrincipal": false,
-        "suppressDefaultValue": false
-      },
-      {
-        "uuid": "9a535527-d615-3862-babf-2e5006f5de43",
-        "name": "tierTraversals",
-        "typeUuid": "f9e64367-9db3-34c2-a269-1a7da01352ea",
-        "enclosingTypeName": "programTier",
-        "getterRoleNames": [
-          ""
         ],
         "setterRoleNames": [
           "MERCHANT"
@@ -3687,6 +3773,22 @@
       {
         "uuid": "29e06709-537a-38b6-a230-bc5ddaa8f482",
         "name": "state",
+        "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
+        "enclosingTypeName": "streetAddress",
+        "getterRoleNames": [
+          "*"
+        ],
+        "setterRoleNames": [
+          "*"
+        ],
+        "deepTraversalOnly": false,
+        "embedded": false,
+        "inheritPrincipal": false,
+        "suppressDefaultValue": false
+      },
+      {
+        "uuid": "e393351a-bfb4-3496-939c-401f28e9982e",
+        "name": "country",
         "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
         "enclosingTypeName": "streetAddress",
         "getterRoleNames": [
@@ -4044,28 +4146,7 @@
           "CLERK",
           "CUSTOMER"
         ],
-        "setterRoleNames": [
-          "CLERK",
-          "CUSTOMER"
-        ],
-        "deepTraversalOnly": false,
-        "embedded": false,
-        "inheritPrincipal": false,
-        "suppressDefaultValue": false
-      },
-      {
-        "uuid": "43270d2a-8642-38b9-a138-9fc23ff9691e",
-        "name": "visit",
-        "typeUuid": "5353cf4d-c234-3ccd-aa8c-3720c02ee3ea",
-        "enclosingTypeName": "couponRedemption",
-        "getterRoleNames": [
-          "CLERK",
-          "CUSTOMER"
-        ],
-        "setterRoleNames": [
-          "CLERK",
-          "CUSTOMER"
-        ],
+        "setterRoleNames": [],
         "deepTraversalOnly": false,
         "embedded": false,
         "inheritPrincipal": false,
@@ -4080,10 +4161,7 @@
           "CLERK",
           "CUSTOMER"
         ],
-        "setterRoleNames": [
-          "CLERK",
-          "CUSTOMER"
-        ],
+        "setterRoleNames": [],
         "deepTraversalOnly": false,
         "embedded": false,
         "inheritPrincipal": false,
@@ -4662,22 +4740,6 @@
         "suppressDefaultValue": false
       },
       {
-        "uuid": "b5e486c1-432f-34d1-90f0-33d15f4b7569",
-        "name": "title",
-        "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
-        "enclosingTypeName": "coupon",
-        "getterRoleNames": [
-          "*"
-        ],
-        "setterRoleNames": [
-          "MERCHANT"
-        ],
-        "deepTraversalOnly": false,
-        "embedded": false,
-        "inheritPrincipal": false,
-        "suppressDefaultValue": false
-      },
-      {
         "uuid": "735d044c-8b49-3144-a793-470c7959c644",
         "name": "localBeginsAt",
         "typeUuid": "58c347e8-8af5-3fde-8c79-d148897068e9",
@@ -4798,6 +4860,22 @@
         "suppressDefaultValue": false
       },
       {
+        "uuid": "b5e486c1-432f-34d1-90f0-33d15f4b7569",
+        "name": "title",
+        "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
+        "enclosingTypeName": "coupon",
+        "getterRoleNames": [
+          "*"
+        ],
+        "setterRoleNames": [
+          "MERCHANT"
+        ],
+        "deepTraversalOnly": false,
+        "embedded": false,
+        "inheritPrincipal": false,
+        "suppressDefaultValue": false
+      },
+      {
         "uuid": "e0d256a6-42ef-3264-b194-d658aa2f22e7",
         "name": "url",
         "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
@@ -4896,10 +4974,9 @@
         "suppressDefaultValue": false
       },
       {
-        "uuid": "6a1a36cb-0fc0-35cb-8cda-01309dced89d",
-        "name": "rrule",
+        "uuid": "2581817e-cef9-3633-8dfc-d2e2401618ca",
+        "name": "title",
         "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
-        "docString": "Retains the original <code>RRULE</code> string used to construct the campaign.",
         "enclosingTypeName": "couponCampaign",
         "getterRoleNames": [
           "MERCHANT"
@@ -4913,9 +4990,10 @@
         "suppressDefaultValue": false
       },
       {
-        "uuid": "2581817e-cef9-3633-8dfc-d2e2401618ca",
-        "name": "title",
+        "uuid": "6a1a36cb-0fc0-35cb-8cda-01309dced89d",
+        "name": "rrule",
         "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
+        "docString": "Retains the original <code>RRULE</code> string used to construct the campaign.",
         "enclosingTypeName": "couponCampaign",
         "getterRoleNames": [
           "MERCHANT"
@@ -4981,6 +5059,15 @@
       {
         "uuid": "8972f791-3eaa-3e17-8202-a4d84aa17557",
         "name": "endpointDescription",
+        "jsonKind": "STRING"
+      },
+      {
+        "uuid": "ad304f3c-d781-3fe7-956a-cd2c37a284f9",
+        "jsonKind": "ANY"
+      },
+      {
+        "uuid": "bd3aece5-501d-3382-97ac-bf91ab923588",
+        "name": "baseEntityGlobal",
         "jsonKind": "STRING"
       },
       {
@@ -5164,10 +5251,6 @@
         "jsonKind": "STRING"
       },
       {
-        "uuid": "ad304f3c-d781-3fe7-956a-cd2c37a284f9",
-        "jsonKind": "ANY"
-      },
-      {
         "uuid": "9c9c1d3b-93aa-3cd3-9117-5c31e580673c",
         "name": "program",
         "jsonKind": "STRING"
@@ -5344,11 +5427,6 @@
         "listElementUuid": "57504ce9-2871-3529-8017-069ecdf41d64"
       },
       {
-        "uuid": "bd3aece5-501d-3382-97ac-bf91ab923588",
-        "name": "baseEntityGlobal",
-        "jsonKind": "STRING"
-      },
-      {
         "uuid": "8272c0fc-cac4-3904-a7f9-b9bbbad76f98",
         "name": "apiDescription",
         "jsonKind": "STRING"
@@ -5358,6 +5436,11 @@
         "jsonKind": "MAP",
         "mapKeyUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
         "mapValueUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe"
+      },
+      {
+        "uuid": "af9f2169-4275-3d99-a45e-5ac491c21800",
+        "name": "entityAnnotation",
+        "jsonKind": "STRING"
       },
       {
         "uuid": "746822f4-3096-3162-81e6-104be91404ff",
@@ -5457,6 +5540,31 @@
         "docString": "A diagnostic endpoint to extract the information from an OAuth2 authorization code, login\n token, session token, or refresh token.",
         "roleNames": [
           "*"
+        ]
+      },
+      {
+        "uuid": "de28436a-7255-3e2d-8939-a0ad2fda4fee",
+        "method": "GET",
+        "returnTypeUuid": "af9f2169-4275-3d99-a45e-5ac491c21800",
+        "path": "/api/2/annotation/{type}/{uuid}",
+        "pathParametersUuid": [
+          "b0ff9975-9216-30da-8227-0157799f4ab4",
+          "9fe9c861-2abc-3089-872e-2f7e7a058185"
+        ],
+        "docString": "Find an annotation applied to a persistent entity.",
+        "roleNames": [
+          "INTEGRATOR"
+        ]
+      },
+      {
+        "uuid": "b24d7dfc-8f4f-3344-9a72-2754ffb3526e",
+        "method": "PUT",
+        "returnTypeUuid": "af9f2169-4275-3d99-a45e-5ac491c21800",
+        "path": "/api/2/annotation",
+        "entityUuid": "af9f2169-4275-3d99-a45e-5ac491c21800",
+        "docString": "Add or replace an annotation applied to a persistent entity. If the value of\n <entityReference payloadName='entityAnnotation'> EntityAnnotation</entityReference> is missing or <code>null</code>, the annotation will be removed. This\n method will return the previously-stored annotation, if any.",
+        "roleNames": [
+          "INTEGRATOR"
         ]
       },
       {
@@ -5635,6 +5743,20 @@
         "name": "token",
         "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
         "endpointUuid": "9a6c26e2-c269-380c-b449-8f5c56a67140"
+      },
+      {
+        "uuid": "b0ff9975-9216-30da-8227-0157799f4ab4",
+        "name": "type",
+        "typeUuid": "41d0c340-e8c1-3592-8bf4-f69c8ea830fe",
+        "docString": "the simple type name of the object (e.g. <code>merchant</code>)",
+        "endpointUuid": "de28436a-7255-3e2d-8939-a0ad2fda4fee"
+      },
+      {
+        "uuid": "9fe9c861-2abc-3089-872e-2f7e7a058185",
+        "name": "uuid",
+        "typeUuid": "f4f93b7e-fa2d-3130-91f3-09f9affe63a9",
+        "docString": "the UUID of the requested object",
+        "endpointUuid": "de28436a-7255-3e2d-8939-a0ad2fda4fee"
       },
       {
         "uuid": "09518c63-4608-38d0-bf7d-d5d23cdf5eae",
