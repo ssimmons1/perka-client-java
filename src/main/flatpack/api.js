@@ -93,6 +93,7 @@
           "19139664-6118-3ca1-b04a-460a11770463",
           "662dcfe1-a713-316f-ba44-999ed3a9cb02",
           "20f41ca5-86f8-3761-a9c0-fb2d11756053",
+          "3ebe2e55-bdc9-33ba-a604-8ba79cf20e85",
           "471b2fae-2c46-3620-95fd-79c6bbcd6a5d",
           "dd2eae38-a224-33ce-a3c1-6a14439a17ee",
           "3bedb4bb-6d4b-30a4-910c-134ed9f257c0",
@@ -727,8 +728,8 @@
           "7032541c-9b4b-3576-9ac4-6329b13470c9",
           "62976edf-002a-33ae-9df9-b8a2a344d358",
           "bc233360-f2e1-3d2e-a033-4da5722d9096",
-          "4aa06b21-bcd2-3b6a-8745-8f9dc3c1e9b9",
           "fb0ec0f9-6a14-3200-a76a-fcd7f1a4b7a6",
+          "4aa06b21-bcd2-3b6a-8745-8f9dc3c1e9b9",
           "ce6b91f3-4640-356b-a7b2-26384565e911"
         ],
         "typeName": "rewardAdvancement",
@@ -788,8 +789,8 @@
           "bddc8979-3a44-371c-b158-155b38dcced4",
           "7032541c-9b4b-3576-9ac4-6329b13470c9",
           "62976edf-002a-33ae-9df9-b8a2a344d358",
-          "23e31d34-fe0f-3c4e-a30c-ead2dc57d738",
           "43270d2a-8642-38b9-a138-9fc23ff9691e",
+          "23e31d34-fe0f-3c4e-a30c-ead2dc57d738",
           "09adcdc8-c99a-32e3-936c-52cca5083dfc"
         ],
         "typeName": "couponRedemption",
@@ -5661,6 +5662,18 @@
         "docString": "Reward a Customer. This method will implicitly create a <entityReference payloadName='visit'> Visit</entityReference> which will be returned.",
         "roleNames": [
           "CLERK"
+        ]
+      },
+      {
+        "uuid": "3ebe2e55-bdc9-33ba-a604-8ba79cf20e85",
+        "method": "PUT",
+        "returnTypeUuid": "5353cf4d-c234-3ccd-aa8c-3720c02ee3ea",
+        "path": "/api/2/customer/visit/amend",
+        "entityUuid": "55a699fe-4b05-313c-bf02-bf10ef54b270",
+        "docString": "Rewrites the history of a customer's latest validated visit to a merchant. The\n <entityReference payloadName='abstractRewardConfirmation'> AbstractRewardConfirmation</entityReference> instances associated with the <entityReference payloadName='visitConfirmation'> VisitConfirmation</entityReference>\n should reflect the desired state of the Visit.\n <p>\n This method will return the updated Visit.",
+        "roleNames": [
+          "CLERK",
+          "MERCHANT"
         ]
       },
       {
