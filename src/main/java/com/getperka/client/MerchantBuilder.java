@@ -19,6 +19,7 @@
  */
 package com.getperka.client;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -35,6 +36,9 @@ import java.util.List;
  */
 public class MerchantBuilder {
 
+  /**
+   * A helper object to construct punchcard-based loyalty program options.
+   */
   public class OfferBuilder {
     private final Program localProgram = new Program();
     private final Program regularProgram = new Program();
@@ -117,9 +121,42 @@ public class MerchantBuilder {
     }
   }
 
+  /**
+   * A helper object to configure a points-based loyalty program.
+   */
+  public class PointsBuilder {
+    /**
+     * Attach a {@link PointsCatalogItem} to the {@link Merchant}.
+     */
+    public PointsBuilder addCatalogItem(PointsCatalogItem item) {
+      merchant.getPointsCatalogItems().add(item);
+      item.setMerchant(merchant);
+      return this;
+    }
+
+    /**
+     * Returns the {@link MerchantBuilder} used to construct the PointsBuilder.
+     */
+    public MerchantBuilder finishPoints() {
+      return MerchantBuilder.this;
+    }
+
+    /**
+     * Set the currency-to-points multipliers for each tier.
+     */
+    public PointsBuilder withTierMultipliers(BigDecimal local, BigDecimal regular, BigDecimal vip) {
+      localTier.setPointsMultiplier(local);
+      regularTier.setPointsMultiplier(regular);
+      vipTier.setPointsMultiplier(vip);
+      return this;
+    }
+  }
+
+  private LoyaltyType establishedLoyaltyType;
   private Merchant merchant;
   private ProgramTier localTier;
   private ProgramTier regularTier;
+
   private ProgramTier vipTier;
 
   MerchantBuilder() {
@@ -127,6 +164,7 @@ public class MerchantBuilder {
     merchant.setMerchantLocations(new ArrayList<MerchantLocation>());
     merchant.setMerchantUsers(new ArrayList<MerchantUser>());
     merchant.setMerchantState(MerchantState.TRIAL);
+    merchant.setPointsCatalogItems(new ArrayList<PointsCatalogItem>());
 
     localTier = new ProgramTier();
     localTier.setMerchant(merchant);
@@ -204,14 +242,26 @@ public class MerchantBuilder {
   }
 
   /**
-   * Creates a helper method for configuring the {@link Program}, {@link ProgramTier}, and
-   * {@link ProgramType} associated with a loyalty program.
+   * Creates a helper object for configuring a points-based loyalty program.
+   */
+  public PointsBuilder withPointsProgram() {
+    checkProgramType(LoyaltyType.POINT);
+    return new PointsBuilder();
+  }
+
+  /**
+   * Creates a helper object for configuring the {@link Program}, {@link ProgramTier}, and
+   * {@link ProgramType} associated with a punchcard-based loyalty program.
+   * <p>
+   * This method may be called multiple times, but it is an error to call this method if
+   * {@link #withPointsProgram()} has been called.
    * 
    * @param programName A short, usually one-word, description of the product being offered, e.g.
    *          {@code coffee} or {@code sandwiches}
    * @return a builder for customizing the offering
    */
   public OfferBuilder withProgram(String programName) {
+    checkProgramType(LoyaltyType.PUNCHCARD);
     return new OfferBuilder(programName);
   }
 
@@ -230,5 +280,17 @@ public class MerchantBuilder {
     regularTier.setVisitsNeeded(regulars);
     vipTier.setVisitsNeeded(vips);
     return this;
+  }
+
+  private void checkProgramType(LoyaltyType desiredType) {
+    if (desiredType.equals(establishedLoyaltyType)) {
+      return;
+    }
+    if (establishedLoyaltyType != null) {
+      throw new IllegalStateException("Cannot switch from " + establishedLoyaltyType + " to "
+        + desiredType);
+    }
+    establishedLoyaltyType = desiredType;
+    merchant.setLoyaltyType(desiredType);
   }
 }
