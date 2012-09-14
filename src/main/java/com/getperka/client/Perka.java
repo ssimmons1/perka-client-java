@@ -83,8 +83,12 @@ public class Perka {
     return new MerchantUtils();
   }
 
+  protected FlatPack getFlatPack() {
+    return flatpack;
+  }
+
   Perka newInstance() {
-    Perka copy = new Perka(flatpack);
+    Perka copy = new Perka(getFlatPack());
     copy.api().setServerBase(api().getServerBase());
     copy.auth().copyFrom(auth());
     return copy;
