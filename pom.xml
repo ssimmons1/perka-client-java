@@ -37,19 +37,19 @@
   </parent>
 
   <properties>
-    <flatpack.version>2.15-SNAPSHOT</flatpack.version>
+    <flatpack.version>2.15</flatpack.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>com.getperka.flatpack</groupId>
       <artifactId>flatpack-client</artifactId>
-      <version>2.15</version>
+      <version>${flatpack.version}</version>
     </dependency>
     <dependency>
       <groupId>com.getperka.flatpack</groupId>
       <artifactId>flatpack-core</artifactId>
-      <version>2.15</version>
+      <version>${flatpack.version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.code.gson</groupId>
@@ -79,7 +79,7 @@
       <plugin>
         <groupId>com.getperka.flatpack</groupId>
         <artifactId>flatpack-fast-maven-plugin</artifactId>
-        <version>2.15</version>
+        <version>${flatpack.version}</version>
         <configuration>
           <source>src/main/flatpack/api.js</source>
           <packageName>com.getperka.client</packageName>
