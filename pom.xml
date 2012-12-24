@@ -33,7 +33,7 @@
   <parent>
     <groupId>com.getperka</groupId>
     <artifactId>perka-oss-parent</artifactId>
-    <version>1.4-SNAPSHOT</version>
+    <version>1.4</version>
   </parent>
 
   <properties>
