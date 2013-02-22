@@ -4,8 +4,9 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.joda.time.DateTime;
@@ -13,7 +14,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
 public class IntegratorTest extends Assert {
+
+  // private static final String INTEGRATOR_CLIENT_ID = "e475e342-a542-11e1-9f8d-cde92706a93d";
+  // private static final String INTEGRATOR_PASSWORD = "integrator";
+  // private static final String API_BASE = "http://localhost";
 
   private static final String INTEGRATOR_CLIENT_ID = "44ff7a20-cb63-11e1-9b23-0800200c9a66";
   private static final String INTEGRATOR_PASSWORD = "foobar";
@@ -31,6 +39,165 @@ public class IntegratorTest extends Assert {
     perka.api().setServerBase(new URI(API_BASE));
     perka.auth().integratorLogin(UUID.fromString(INTEGRATOR_CLIENT_ID), INTEGRATOR_PASSWORD);
     perka.api().integratorDestroyDelete().execute();
+  }
+
+  /**
+   * Ensures that visits can be properly amended after they're created
+   */
+  @Test
+  public void testAmendVisit() throws Exception {
+    // set up a new customer
+    UserCredentials creds = new UserCredentials();
+    creds.setEmail("joe@getperka.com");
+    Customer customer = perka.api().integratorCustomerPost(creds).execute().getValue();
+
+    // switch over to a clerk at the first location
+    List<Merchant> merchants = perka.api().integratorManagedMerchantsGet().execute().getValue();
+    Merchant merchant = (Merchant) perka.api().describeTypeUuidGet(
+        "merchant", merchants.get(0).getUuid()).execute().getValue();
+    MerchantLocation location = merchant.getMerchantLocations().get(0);
+    perka = perka.auth().become(location.getUuid(), "CLERK");
+
+    // assign some punches
+    ProgramType programType =
+        merchant.getProgramTiers().get(0).getPrograms().get(0).getProgramType();
+    PunchRewardConfirmation punchConfirmation = new PunchRewardConfirmation();
+    punchConfirmation.setProgramType(programType);
+    punchConfirmation.setPunchesEarned(1);
+    RewardGrant grant = new RewardGrant();
+    grant.setCustomer(customer);
+    List<AbstractRewardConfirmation> confs =
+        new ArrayList<AbstractRewardConfirmation>();
+    confs.add(punchConfirmation);
+    grant.setRewardConfirmations(confs);
+    Visit visit = perka.api().customerRewardPut(grant).execute().getValue();
+
+    // confirm that we have one reward with a single punch
+    // obtained at location_one.
+    assertEquals(1, visit.getCustomer().getRewards().size());
+    assertEquals(1, visit.getCustomer().getRewards().get(0).getPunchesEarned().intValue());
+    assertEquals(1, visit.getRewardAdvancements().size());
+    assertEquals(1, visit.getRewardAdvancements().get(0).getPunchesEarned().intValue());
+    assertEquals(location.getUuid(), visit.getMerchantLocation().getUuid());
+
+    // We can now edit the visit to change the number of punches given.
+    // This operation re-writes the history of the visit, so the payload
+    // must represent the new state in its entirety, even if some
+    // data remains the same. Also note that the visit given MUST be
+    // the customers most recent visit. You cannot currently amend any
+    // visit prior to the most recent visit.
+    VisitConfirmation visitConfirmation = new VisitConfirmation();
+    visitConfirmation.setVisit(visit);
+    punchConfirmation = new PunchRewardConfirmation();
+    punchConfirmation.setPunchesEarned(3);
+    punchConfirmation.setProgramType(programType);
+    confs = new ArrayList<AbstractRewardConfirmation>();
+    confs.add(punchConfirmation);
+    visitConfirmation.setRewardConfirmations(confs);
+    Visit amendedVisit = perka.api().customerVisitAmendPut(visitConfirmation).execute().getValue();
+
+    // confirm that we still have only 1 reward, but that the reward
+    // now has 3 punches instead of 1
+    assertEquals(1, amendedVisit.getCustomer().getRewards().size());
+    assertEquals(3, amendedVisit.getCustomer().getRewards().get(0).getPunchesEarned().intValue());
+    assertEquals(1, amendedVisit.getRewardAdvancements().size());
+    assertEquals(3, amendedVisit.getRewardAdvancements().get(0).getPunchesEarned().intValue());
+    assertEquals(location.getUuid(), amendedVisit.getMerchantLocation().getUuid());
+
+    // In certain situations, we may also want to change the location
+    // where the visit occurred. In order to do this, we need to upgrade
+    // our role to a merchant user, since the clerk's access is limited
+    // to the location they're assigned to
+    MerchantUser manager = merchant.getMerchantUsers().get(0);
+    perka.auth().integratorLogin(UUID.fromString(INTEGRATOR_CLIENT_ID), INTEGRATOR_PASSWORD);
+    perka = perka.auth().become(manager);
+
+    // swap the visit's location out for another one
+    MerchantLocation locationTwo =
+        merchant.getMerchantLocations().get(merchant.getMerchantLocations().size() - 1);
+    assertNotSame(location.getUuid(), locationTwo.getUuid());
+    amendedVisit.setMerchantLocation(locationTwo);
+
+    // then request for the vist to be amended again. Remember, we need to
+    // pass up the entire new state of the visit here, so we could change
+    // the number of punches given again
+    visitConfirmation.setVisit(amendedVisit);
+    punchConfirmation.setPunchesEarned(4);
+    Visit newAmendedVisit = perka.api().customerVisitAmendPut(visitConfirmation).execute()
+        .getValue();
+
+    // ensure that the visit was in fact moved to the new location, and that
+    // the punch count was updated again
+    assertEquals(locationTwo.getUuid(), newAmendedVisit.getMerchantLocation().getUuid());
+    assertEquals(1, newAmendedVisit.getCustomer().getRewards().size());
+    assertEquals(4, newAmendedVisit.getCustomer().getRewards().get(0).getPunchesEarned().intValue());
+    assertEquals(1, newAmendedVisit.getRewardAdvancements().size());
+    assertEquals(4, newAmendedVisit.getRewardAdvancements().get(0).getPunchesEarned().intValue());
+  }
+
+  /**
+   * Ensures that coupons can be properly redeemed
+   */
+  @Test
+  public void testCouponRedemption() throws Exception {
+    // set up a new customer
+    UserCredentials creds = new UserCredentials();
+    creds.setEmail("joe@getperka.com");
+    Customer customer = perka.api().integratorCustomerPost(creds).execute().getValue();
+
+    // switch over to a clerk at the first location
+    List<Merchant> merchants = perka.api().integratorManagedMerchantsGet().execute().getValue();
+    Merchant merchant = (Merchant) perka.api().describeTypeUuidGet(
+        "merchant", merchants.get(0).getUuid()).execute().getValue();
+    MerchantLocation location = merchant.getMerchantLocations().get(0);
+    perka = perka.auth().become(location.getUuid(), "CLERK");
+
+    // each merchant location may have a set of coupon visibilites
+    // enabling coupon(s) to be redeemed at that location. This
+    // particular merchant has been set up with a standard coupon
+    // available to any customer visiting any of their locations.
+    Set<Coupon> availableCoupons = new HashSet<Coupon>();
+    for (CouponVisibility vis : location.getCouponVisibilities()) {
+      availableCoupons.add(vis.getCoupon());
+    }
+    assertEquals(1, availableCoupons.size());
+    Coupon coupon = availableCoupons.iterator().next();
+
+    // we can now specify that this coupon should be redeemed when
+    // validating a visit. We can also pass along some punches
+    // earned to be recoreded in the same transaction
+    ProgramType programType =
+        merchant.getProgramTiers().get(0).getPrograms().get(0).getProgramType();
+
+    RedemptionCouponConfirmation couponConfirmation = new RedemptionCouponConfirmation();
+    couponConfirmation.setCoupon(coupon);
+
+    PunchRewardConfirmation punchConfirmation = new PunchRewardConfirmation();
+    punchConfirmation.setProgramType(programType);
+    punchConfirmation.setPunchesEarned(1);
+
+    List<AbstractRewardConfirmation> confs = new ArrayList<AbstractRewardConfirmation>();
+    confs.add(couponConfirmation);
+    confs.add(punchConfirmation);
+
+    RewardGrant grant = new RewardGrant();
+    grant.setCustomer(customer);
+    grant.setRewardConfirmations(confs);
+    Visit visit = perka.api().customerRewardPut(grant).execute().getValue();
+
+    // confirm that the coupon has been redeemed by
+    // looking for an appropriate coupon redemption
+    // within the resulting visit
+    assertEquals(1, visit.getCouponRedemptions().size());
+    CouponRedemption redemption = visit.getCouponRedemptions().get(0);
+    assertEquals(coupon.getUuid(), redemption.getCoupon().getUuid());
+
+    // our punches should also be present in the visit
+    assertEquals(location.getUuid(), visit.getMerchantLocation().getUuid());
+    assertEquals(1, visit.getCustomer().getRewards().size());
+    assertEquals(1, visit.getCustomer().getRewards().get(0).getPunchesEarned().intValue());
+    assertEquals(1, visit.getRewardAdvancements().size());
+    assertEquals(1, visit.getRewardAdvancements().get(0).getPunchesEarned().intValue());
   }
 
   /**
@@ -73,8 +240,92 @@ public class IntegratorTest extends Assert {
    * Ensures that the proper customer status can be obtained
    */
   @Test
-  public void testCustomerStatus() {
+  public void testCustomerStatus() throws Exception {
+    // set up a new customer
+    UserCredentials creds = new UserCredentials();
+    creds.setEmail("joe@getperka.com");
+    Customer customer = perka.api().integratorCustomerPost(creds).execute().getValue();
 
+    // switch over to a clerk at the first location
+    List<Merchant> merchants = perka.api().integratorManagedMerchantsGet().execute().getValue();
+    Merchant merchant = (Merchant) perka.api().describeTypeUuidGet(
+        "merchant", merchants.get(0).getUuid()).execute().getValue();
+    MerchantLocation location = merchant.getMerchantLocations().get(0);
+    perka = perka.auth().become(location.getUuid(), "CLERK");
+
+    // fetch our customer. The customer_uuid_get endpoint will
+    // populate the resulting customer with reward, tier_traversal, and
+    // available coupon information
+    customer = perka.api().customerUuidGet(customer.getUuid()).execute().getValue();
+
+    // since this customer doesn't have any visits yet, there should be
+    // no tier_traversal or reward information
+    assertNull(customer.getTierTraversals());
+    assertNull(customer.getRewards());
+
+    // let's go ahaead and create a visit
+    ProgramType programType =
+        merchant.getProgramTiers().get(0).getPrograms().get(0).getProgramType();
+    PunchRewardConfirmation punchConfirmation = new PunchRewardConfirmation();
+    punchConfirmation.setProgramType(programType);
+    punchConfirmation.setPunchesEarned(2);
+    RewardGrant grant = new RewardGrant();
+    grant.setCustomer(customer);
+    List<AbstractRewardConfirmation> confs =
+        new ArrayList<AbstractRewardConfirmation>();
+    confs.add(punchConfirmation);
+    grant.setRewardConfirmations(confs);
+    Visit visit = perka.api().customerRewardPut(grant).execute().getValue();
+
+    // Note that since the most recent tierTraversal can be expected in the
+    // response, the visit can be used to check the customer's current status
+    // at the merchant. In this case, our customer should be in the
+    // lowest 'local' tier. We do a simple name comparison here, but if you
+    // need to verify that a customer belongs to a particular tier, the tier
+    // should be compared against one of those returned from a
+    // describe_entity_get(merchant) request.
+    assertEquals(1, visit.getCustomer().getTierTraversals().size());
+    assertEquals("local", visit.getCustomer().getTierTraversals().get(0).getProgramTier().getName());
+
+    // We'll make another round trip to the server to ensure we can
+    // now access the customer's most recent tier traversal for the
+    // merchant associated with the current session
+    customer = perka.api().customerUuidGet(customer.getUuid()).execute().getValue();
+    assertEquals(1, customer.getTierTraversals().size());
+    assertEquals("local", customer.getTierTraversals().get(0).getProgramTier().getName());
+    assertEquals(merchant.getUuid(),
+        customer.getTierTraversals().get(0).getProgramTier().getMerchant().getUuid());
+  }
+
+  /**
+   * Ensures entities can be properly annotated with arbitray JSON data
+   */
+  @Test
+  public void testEntityAnnotation() throws Exception {
+
+    // first we'll grab a reference to one of our managed merchants
+    List<Merchant> merchants = perka.api().integratorManagedMerchantsGet().execute().getValue();
+    Merchant merchant = merchants.get(0);
+
+    // then apply an arbitrary annotation to the merchant
+    JsonElement json = new JsonParser().parse("{'foo':'bar'}");
+    EntityAnnotation entityAnnotation = new EntityAnnotation();
+    entityAnnotation.setEntity(merchant);
+    entityAnnotation.setAnnotation(json);
+    perka.api().annotationPut(entityAnnotation).execute().getValue();
+
+    // which can be retreived at any time
+    entityAnnotation = perka.api().annotationTypeUuidGet(
+        "merchant", merchant.getUuid()).execute().getValue();
+    assertEquals(json, entityAnnotation.getAnnotation());
+
+    // now we'll update our annotation to a new value
+    json = new JsonParser().parse("{'bar':'baz'}");
+    entityAnnotation.setAnnotation(json);
+    entityAnnotation = perka.api().annotationPut(entityAnnotation).execute().getValue();
+
+    // and verify the update
+    assertEquals(json, entityAnnotation.getAnnotation());
   }
 
   /**
@@ -83,6 +334,8 @@ public class IntegratorTest extends Assert {
    */
   @Test
   public void testVisitValidations() throws Exception {
+
+    // we'll first create a new customer
     UserCredentials creds = new UserCredentials();
     creds.setEmail("joe@getperka.com");
     Customer customer = perka.api().integratorCustomerPost(creds).execute().getValue();
