@@ -1,8 +1,12 @@
-# Perka Client Library
+## Perka Java Client Library
 
-This library is mostly auto-generated and exists as a convenience target for developers using Perka's API.
+Allows Java developers to easily integrate with [The Perka API](https://getperka.com/developer/)
 
-The Maven coordinates are:
+For SDK Documentation: http://perka.github.com/site/release/client/apidocs/index.html
+
+For general API information: https://getperka.com/developer/ 
+
+If you're using Maven, add the following dependency to your pom file:
 ```xml
 <dependency>
     <groupId>com.getperka.client</groupId>
