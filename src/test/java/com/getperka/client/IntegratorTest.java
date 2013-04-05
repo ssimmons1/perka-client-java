@@ -19,13 +19,13 @@ import com.google.gson.JsonParser;
 
 public class IntegratorTest extends Assert {
 
-  // private static final String INTEGRATOR_CLIENT_ID = "e475e342-a542-11e1-9f8d-cde92706a93d";
-  // private static final String INTEGRATOR_PASSWORD = "integrator";
-  // private static final String API_BASE = "http://localhost";
+  private static final String INTEGRATOR_CLIENT_ID = "e475e342-a542-11e1-9f8d-cde92706a93d";
+  private static final String INTEGRATOR_PASSWORD = "integrator";
+  private static final String API_BASE = "http://localhost";
 
-  private static final String INTEGRATOR_CLIENT_ID = "44ff7a20-cb63-11e1-9b23-0800200c9a66";
-  private static final String INTEGRATOR_PASSWORD = "foobar";
-  private static final String API_BASE = "https://sandbox.getperka.com/api/2";
+  // private static final String INTEGRATOR_CLIENT_ID = "44ff7a20-cb63-11e1-9b23-0800200c9a66";
+  // private static final String INTEGRATOR_PASSWORD = "foobar";
+  // private static final String API_BASE = "https://sandbox.getperka.com/api/2";
 
   private Perka perka;
 

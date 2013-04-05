@@ -33,11 +33,11 @@
   <parent>
     <groupId>com.getperka</groupId>
     <artifactId>perka-oss-parent</artifactId>
-    <version>1.4</version>
+    <version>1.5</version>
   </parent>
 
   <properties>
-    <flatpack.version>2.16</flatpack.version>
+    <flatpack.version>2.18.1</flatpack.version>
   </properties>
 
   <dependencies>
@@ -60,6 +60,11 @@
       <groupId>joda-time</groupId>
       <artifactId>joda-time</artifactId>
       <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>jsr250-api</artifactId>
+      <version>1.0</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
