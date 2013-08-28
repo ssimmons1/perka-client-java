@@ -26,8 +26,8 @@ public class IntegratorTest extends Assert {
 
   private static final String INTEGRATOR_CLIENT_ID = "24db6273-079e-4803-88f4-84d7c7ee5ee5";
   private static final String INTEGRATOR_PASSWORD = "testIntegrator";
-  // private static final String API_BASE = "https://sandbox.getperka.com/api/2";
-  private static final String API_BASE = "http://localhost";
+  private static final String API_BASE = "https://sandbox.getperka.com/api/2";
+  // private static final String API_BASE = "http://localhost";
 
   private static Perka perka;
 
