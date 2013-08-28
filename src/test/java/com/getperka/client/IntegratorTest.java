@@ -10,10 +10,15 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.getperka.client.ClientApi.CouponCampaignPost;
+import com.getperka.client.ClientApi.IntegratorMerchantPost;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
@@ -24,7 +29,78 @@ public class IntegratorTest extends Assert {
   // private static final String API_BASE = "https://sandbox.getperka.com/api/2";
   private static final String API_BASE = "http://localhost";
 
-  private Perka perka;
+  private static Perka perka;
+
+  @AfterClass
+  public static void afterClass() throws URISyntaxException, IOException {
+    perka = new Perka();
+    perka.api().setServerBase(new URI(API_BASE));
+    perka.auth().integratorLogin(UUID.fromString(INTEGRATOR_CLIENT_ID), INTEGRATOR_PASSWORD);
+    perka.api().integratorDestroyDelete().withIncludeMerchants(true).execute();
+  }
+
+  /**
+   * Before the class, clear out the whole merchant and rebuild it.
+   */
+  @BeforeClass
+  public static void beforeClass() throws URISyntaxException, IOException {
+    perka = new Perka();
+    perka.api().setServerBase(new URI(API_BASE));
+    perka.auth().integratorLogin(UUID.fromString(INTEGRATOR_CLIENT_ID), INTEGRATOR_PASSWORD);
+    perka.api().integratorDestroyDelete().withIncludeMerchants(true).execute();
+
+    initializeMerchant();
+  }
+
+  private static void initializeMerchant() throws IOException {
+    MerchantBuilder builder = new MerchantBuilder();
+    builder.withProgram("Free coffee program").withFreeitem("free coffee")
+        .withPunchesNeeded(10, 10, 10).withPurchasedItem("buy 10").withImageName("coffee");
+    builder.withName("Perka Client JS Test").withVisitsNeeded(10, 30);
+    // Add location
+    MerchantLocation location = new MerchantLocation();
+    location.setTimezone(DateTimeZone.getDefault());
+    builder.add(location);
+    builder.add(new MerchantLocation());
+    MerchantUser admin = new MerchantUser();
+    admin.setFirstName("Admin");
+    admin.setLastName("User");
+    builder.add(admin);
+    Merchant merch = builder.build();
+    merch.setMerchantState(MerchantState.PRELIMINARY);
+
+    IntegratorMerchantPost imp = perka.api().integratorMerchantPost(merch);
+    // imp.peek().withTraversalMode(com.getperka.flatpack.TraversalMode.DEEP);
+    imp.execute();
+
+    // Create coupon campaign
+    CouponCampaign campaign = new CouponCampaign();
+    campaign.setTitle("sweet campaign");
+    List<Coupon> coupons = new ArrayList<Coupon>();
+    Coupon coupon = new Coupon();
+
+    List<CouponVisibility> cvs = new ArrayList<CouponVisibility>();
+    CouponVisibility cv = new CouponVisibility();
+    EverybodyTarget target = new EverybodyTarget();
+    target.setMerchant(merch);
+    cv.setCoupon(coupon);
+    cv.setCouponTarget(target);
+    cv.setMerchantLocation(merch.getMerchantLocations().get(0));
+    cvs.add(cv);
+    coupon.setCouponVisibilities(cvs);
+    // Start now
+    coupon.setLocalBeginsAt(DateTime.now(DateTimeZone.getDefault()).toLocalDateTime());
+    // End one hour from now
+    coupon.setLocalEndsAt(DateTime.now(DateTimeZone.getDefault()).plusHours(1).toLocalDateTime());
+    coupon.setTitle("sweet deal");
+    coupon.setSummary("on all the things");
+    coupon.setImageName("coffee");
+
+    coupons.add(coupon);
+    campaign.setCoupons(coupons);
+    CouponCampaignPost ccp = perka.api().couponCampaignPost(campaign);
+    ccp.execute();
+  }
 
   /**
    * Before each test, we'll initialize our API with a base url and integrator access credentials,
