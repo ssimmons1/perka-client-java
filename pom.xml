@@ -37,7 +37,7 @@
   </parent>
 
   <properties>
-    <flatpack.version>2.21.0-SNAPSHOT</flatpack.version>
+    <flatpack.version>2.21.0</flatpack.version>
   </properties>
 
   <dependencies>
